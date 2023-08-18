@@ -1,0 +1,56 @@
+messages:
+  explicit:
+    - id: "3f34"
+      messageTypes:
+        - type: "shunt-soc"
+          fields:
+            - "ShuntSOC -> shunt"
+          sendRateInMilliseconds: 1000
+          globalSystemId:
+            - "*"
+          apiPath:
+            - http: "/batrium/additionalData"
+            - topic: "topic"
+  wildcard:
+    - id: "*"
+      exclude:
+        - explicit: [ "xxxx", "xx11" ]
+        - implicit: true
+      messageTypes:
+        - type: "*"
+          fields:
+            - "*"
+          globalSystemId:
+            - "*"
+          sendRateInMilliseconds: 10000
+          apiPath:
+            - http: "/batrium/additionalData"
+            - topic: "topic"
+  combined:
+    messageTypes:
+      - type: "combined-message"
+        fields:
+          - combined-field:
+            identifier:
+              - id: "xxxx"
+              - type: "type"
+        globalSystemId:
+          - "*"
+        sendRateInMilliseconds: 10000
+        apiPath:
+          - http: "/batrium/additionalData"
+          - topic: "topic"
+
+default:
+  explicit:
+    - globalSystemId: "globalId"
+      sendRateInMilliseconds: 1000
+      apiPath:
+        http: "/batrium/additionalData/1"
+        topic: "topic-default-explicit"
+  wildcard:
+    globalSystemId: "*"
+    sendRateInMilliseconds: 2000
+    apiPath:
+      http: "/batrium/additionalData/2"
+      topic: "topic-default-wildcard"
